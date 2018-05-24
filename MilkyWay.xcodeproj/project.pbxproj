@@ -14,6 +14,7 @@
 		BA63DDCC20B7184200C7DE45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA63DDCB20B7184200C7DE45 /* Assets.xcassets */; };
 		BA63DDCF20B7184200C7DE45 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA63DDCD20B7184200C7DE45 /* LaunchScreen.storyboard */; };
 		BA63DDD820B7198100C7DE45 /* RouteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA63DDD720B7198100C7DE45 /* RouteViewController.swift */; };
+		BA63DDDB20B72D1800C7DE45 /* Farm.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA63DDDA20B72D1800C7DE45 /* Farm.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		BA63DDCE20B7184200C7DE45 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BA63DDD020B7184200C7DE45 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA63DDD720B7198100C7DE45 /* RouteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteViewController.swift; sourceTree = "<group>"; };
+		BA63DDDA20B72D1800C7DE45 /* Farm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Farm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 		BA63DDC320B7184000C7DE45 /* MilkyWay */ = {
 			isa = PBXGroup;
 			children = (
+				BA63DDD920B72D0500C7DE45 /* Model */,
 				BA63DDD620B7196300C7DE45 /* View Controllers */,
 				BA63DDC420B7184000C7DE45 /* AppDelegate.swift */,
 				BA63DDC620B7184000C7DE45 /* ViewController.swift */,
@@ -76,6 +79,14 @@
 				BA63DDD720B7198100C7DE45 /* RouteViewController.swift */,
 			);
 			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		BA63DDD920B72D0500C7DE45 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BA63DDDA20B72D1800C7DE45 /* Farm.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,6 +164,7 @@
 				BA63DDC520B7184000C7DE45 /* AppDelegate.swift in Sources */,
 				BA63DDD820B7198100C7DE45 /* RouteViewController.swift in Sources */,
 				57CA5BC920B72E7000518835 /* FarmFormTableViewController.swift in Sources */,
+				BA63DDDB20B72D1800C7DE45 /* Farm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
