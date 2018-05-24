@@ -11,14 +11,15 @@ import UIKit
 class FarmFormTableViewController: UITableViewController {
 
     @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var quantityStepper: UIStepper!
     @IBOutlet weak var gallonStepper: UIStepper!
     @IBOutlet weak var nowLabel: UILabel!
     @IBOutlet weak var timePicker: UIDatePicker!
     @IBOutlet weak var addressTextView: UITextView!
+    @IBOutlet weak var gallonTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -32,12 +33,61 @@ class FarmFormTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    func updateUI() {
+    @IBAction func cancel(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    //First Time Setup - New Farm
+    func setupUI() {
         updateNowLabel(date: timePicker.date)
+        gallonTextField.text = "0"
     }
     
     func updateNowLabel(date: Date) {
-        //nowLabel.text = Farm.duoDateFormatter.string(from: date)
+        nowLabel.text = Farm.produceHourFormatter.string(from: date)
+    }
+    
+    @IBAction func gallonStepperChanged(_ sender: UIStepper) {
+        gallonTextField.text = Int(sender.value).description
+    }
+    
+    @IBAction func pickerTimeChanged(_ sender: UIDatePicker) {
+        updateNowLabel(date: timePicker.date)
+    }
+    
+    var isPickerHidden = true
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt
+        indexPath: IndexPath) -> CGFloat {
+        let normalCellHeight = CGFloat(43)
+        let largeCellHeight = CGFloat(200)
+        
+        switch(indexPath) {
+        case [0,2]: //Due Date Cell
+            return isPickerHidden ? normalCellHeight :
+            largeCellHeight
+            
+        case [1,0]: //Notes Cell
+            return largeCellHeight
+            
+        default: return normalCellHeight
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt
+        indexPath: IndexPath) {
+        switch (indexPath) {
+        case [0,2]:
+            isPickerHidden = !isPickerHidden
+            
+            nowLabel.textColor =
+                isPickerHidden ? .black : tableView.tintColor
+            
+            tableView.beginUpdates()
+            tableView.endUpdates()
+            
+        default: break
+        }
     }
     
     // MARK: - Table view data source
