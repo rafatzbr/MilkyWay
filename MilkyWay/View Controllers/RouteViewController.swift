@@ -29,17 +29,27 @@ class RouteViewController: UIViewController, CLLocationManagerDelegate {
         } else {
             farms = Farm.loadSampleFarms()
         }
+        let queue = OperationQueue()
         
         for farm in farms {
-            geocoder.geocodeAddressString(farm.address) { (placemarks, error) in
-                guard let placemarks = placemarks, let location = placemarks.first?.location
-                    else {
-                        return
-                }
+            queue.addOperation {
+                let request = MKLocalSearchRequest()
+                request.naturalLanguageQuery = farm.address
+                request.region = self.mapView.region
                 
-                let coordinate = location.coordinate
-                let farmAnnotation = FarmAnnotation(title: farm.name, coordinate: coordinate)
-                self.mapView.addAnnotation(farmAnnotation)
+                let search = MKLocalSearch(request: request)
+                
+                search.start {
+                    (response, error) in
+                    if error == nil {
+                        if let res = response {
+                            for local in res.mapItems {
+                                let placemark = FarmAnnotation(title: farm.name, coordinate: local.placemark.coordinate)
+                                self.mapView.addAnnotation(placemark)
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -72,7 +82,7 @@ class RouteViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        centerMapOnLocation(location: locations.first!)
+//        centerMapOnLocation(location: locations.first!)
     }
     
 
