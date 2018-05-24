@@ -16,6 +16,7 @@
 		BA63DDCF20B7184200C7DE45 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA63DDCD20B7184200C7DE45 /* LaunchScreen.storyboard */; };
 		BA63DDD820B7198100C7DE45 /* RouteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA63DDD720B7198100C7DE45 /* RouteViewController.swift */; };
 		BA63DDDB20B72D1800C7DE45 /* Farm.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA63DDDA20B72D1800C7DE45 /* Farm.swift */; };
+		BA63DDDD20B73A5C00C7DE45 /* FarmAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA63DDDC20B73A5C00C7DE45 /* FarmAnnotation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		BA63DDD020B7184200C7DE45 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA63DDD720B7198100C7DE45 /* RouteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteViewController.swift; sourceTree = "<group>"; };
 		BA63DDDA20B72D1800C7DE45 /* Farm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Farm.swift; sourceTree = "<group>"; };
+		BA63DDDC20B73A5C00C7DE45 /* FarmAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmAnnotation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				BA63DDDA20B72D1800C7DE45 /* Farm.swift */,
+				BA63DDDC20B73A5C00C7DE45 /* FarmAnnotation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -166,6 +169,7 @@
 				BA63DDC720B7184000C7DE45 /* ViewController.swift in Sources */,
 				57CA5BCB20B7497C00518835 /* FarmTableViewController.swift in Sources */,
 				BA63DDC520B7184000C7DE45 /* AppDelegate.swift in Sources */,
+				BA63DDDD20B73A5C00C7DE45 /* FarmAnnotation.swift in Sources */,
 				BA63DDD820B7198100C7DE45 /* RouteViewController.swift in Sources */,
 				57CA5BC920B72E7000518835 /* FarmFormTableViewController.swift in Sources */,
 				BA63DDDB20B72D1800C7DE45 /* Farm.swift in Sources */,
@@ -313,6 +317,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H7S844WDJ2;
 				INFOPLIST_FILE = MilkyWay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -330,6 +335,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H7S844WDJ2;
 				INFOPLIST_FILE = MilkyWay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

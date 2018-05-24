@@ -8,18 +8,40 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 class RouteViewController: UIViewController, CLLocationManagerDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     let regionRadius: CLLocationDistance = 1000
     let locationManager = CLLocationManager()
+    let geocoder = CLGeocoder()
+    var farms = [Farm]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
+        
+        if let savedFarms = Farm.loadFarms() {
+            farms = savedFarms
+        } else {
+            farms = Farm.loadSampleFarms()
+        }
+        
+        for farm in farms {
+            geocoder.geocodeAddressString(farm.address) { (placemarks, error) in
+                guard let placemarks = placemarks, let location = placemarks.first?.location
+                    else {
+                        return
+                }
+                
+                let coordinate = location.coordinate
+                let farmAnnotation = FarmAnnotation(title: farm.name, coordinate: coordinate)
+                self.mapView.addAnnotation(farmAnnotation)
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -37,7 +59,7 @@ class RouteViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func centerMapOnLocation(location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius, regionRadius)
+        let coordinateRegion = MKCoordinateRegionMake(location.coordinate, self.mapView.region.span)
         mapView.setRegion(coordinateRegion, animated: true)
     }
     
