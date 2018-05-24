@@ -64,12 +64,44 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Farms" id="7rn-QY-38j">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="1N0-Vi-8vp"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="1N0-Vi-8vp">
+                            <connections>
+                                <segue destination="SB1-aa-ctA" kind="presentation" identifier="FarmFormSegue" id="auZ-cB-EfU"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FQ7-5a-Gug" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2975.1999999999998" y="829.83508245877067"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="wDk-HZ-9HS">
+            <objects>
+                <tableViewController id="SB1-aa-ctA" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="976-W4-zfO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="qdT-8f-FxN">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qdT-8f-FxN" id="RFT-14-kCk">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="SB1-aa-ctA" id="9Sh-0N-qMr"/>
+                            <outlet property="delegate" destination="SB1-aa-ctA" id="d7c-2O-pkt"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T2p-l4-BxO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3795" y="826"/>
         </scene>
         <!--Farms-->
         <scene sceneID="zXW-ND-adg">
