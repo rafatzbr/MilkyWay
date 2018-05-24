@@ -10,6 +10,13 @@ import UIKit
 
 class FarmFormTableViewController: UITableViewController {
 
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var quantityStepper: UIStepper!
+    @IBOutlet weak var gallonStepper: UIStepper!
+    @IBOutlet weak var nowLabel: UILabel!
+    @IBOutlet weak var timePicker: UIDatePicker!
+    @IBOutlet weak var addressTextView: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,17 +32,15 @@ class FarmFormTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    func updateUI() {
+        updateNowLabel(date: timePicker.date)
+    }
+    
+    func updateNowLabel(date: Date) {
+        //nowLabel.text = Farm.duoDateFormatter.string(from: date)
+    }
+    
     // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
 
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
