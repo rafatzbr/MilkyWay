@@ -35,7 +35,7 @@ struct Farm : Codable {
         let farm1 = Farm(name: "Fazenda Feliz", gallons: 10, produceHour: Date(),
                          address: "BR-116, 311 - Jardim dos Lagos, Guaíba - RS, 92500-000")
         let farm2 = Farm(name: "Fazenda Alegre", gallons: 20, produceHour: Date().addingTimeInterval(200),
-                         address: "Estrada Hernesto Costa Gama, 8005 - Bom Retiro, Guaíba - RS, 92500-000")
+                         address: "Barra do Ribeiro - RS, 96790-000")
         let farm3 = Farm(name: "Fazenda Festiva", gallons: 15, produceHour: Date().addingTimeInterval(360),
                          address: "Av. Frederico Augusto Ritter, 5518-5784 - Distrito Industrial, Cachoeirinha - RS")
         let farm4 = Farm(name: "Fazenda Eufórica", gallons: 50, produceHour: Date().addingTimeInterval(600),
