@@ -53,6 +53,7 @@ class SettingsTableViewController: UITableViewController {
         alert.addAction(UIAlertAction(title: "Ok", style: .default))
         
         present(alert, animated: true, completion: nil)
+        view.endEditing(true)
     }
     
     // MARK: - Table view data source
