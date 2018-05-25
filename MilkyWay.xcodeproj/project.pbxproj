@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		57CA5BC920B72E7000518835 /* FarmFormTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CA5BC820B72E7000518835 /* FarmFormTableViewController.swift */; };
 		57CA5BCB20B7497C00518835 /* FarmTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CA5BCA20B7497C00518835 /* FarmTableViewController.swift */; };
+		57CA5BCD20B87E7B00518835 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CA5BCC20B87E7B00518835 /* SettingsTableViewController.swift */; };
+		57CA5BCF20B8831500518835 /* Producer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CA5BCE20B8831500518835 /* Producer.swift */; };
 		BA63DDC520B7184000C7DE45 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA63DDC420B7184000C7DE45 /* AppDelegate.swift */; };
 		BA63DDC720B7184000C7DE45 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA63DDC620B7184000C7DE45 /* ViewController.swift */; };
 		BA63DDCA20B7184000C7DE45 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA63DDC820B7184000C7DE45 /* Main.storyboard */; };
@@ -22,6 +24,8 @@
 /* Begin PBXFileReference section */
 		57CA5BC820B72E7000518835 /* FarmFormTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmFormTableViewController.swift; sourceTree = "<group>"; };
 		57CA5BCA20B7497C00518835 /* FarmTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmTableViewController.swift; sourceTree = "<group>"; };
+		57CA5BCC20B87E7B00518835 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		57CA5BCE20B8831500518835 /* Producer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Producer.swift; sourceTree = "<group>"; };
 		BA63DDC120B7184000C7DE45 /* MilkyWay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MilkyWay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA63DDC420B7184000C7DE45 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA63DDC620B7184000C7DE45 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +85,7 @@
 			children = (
 				57CA5BCA20B7497C00518835 /* FarmTableViewController.swift */,
 				57CA5BC820B72E7000518835 /* FarmFormTableViewController.swift */,
+				57CA5BCC20B87E7B00518835 /* SettingsTableViewController.swift */,
 				BA63DDD720B7198100C7DE45 /* RouteViewController.swift */,
 			);
 			path = "View Controllers";
@@ -91,6 +96,7 @@
 			children = (
 				BA63DDDA20B72D1800C7DE45 /* Farm.swift */,
 				BA63DDDC20B73A5C00C7DE45 /* FarmAnnotation.swift */,
+				57CA5BCE20B8831500518835 /* Producer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -170,7 +176,9 @@
 				57CA5BCB20B7497C00518835 /* FarmTableViewController.swift in Sources */,
 				BA63DDC520B7184000C7DE45 /* AppDelegate.swift in Sources */,
 				BA63DDDD20B73A5C00C7DE45 /* FarmAnnotation.swift in Sources */,
+				57CA5BCD20B87E7B00518835 /* SettingsTableViewController.swift in Sources */,
 				BA63DDD820B7198100C7DE45 /* RouteViewController.swift in Sources */,
+				57CA5BCF20B8831500518835 /* Producer.swift in Sources */,
 				57CA5BC920B72E7000518835 /* FarmFormTableViewController.swift in Sources */,
 				BA63DDDB20B72D1800C7DE45 /* Farm.swift in Sources */,
 			);
