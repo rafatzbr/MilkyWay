@@ -17,6 +17,8 @@ class FarmFormTableViewController: UITableViewController {
     @IBOutlet weak var addressTextView: UITextView!
     @IBOutlet weak var gallonTextField: UITextField!
     
+    var farm: Farm?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -33,6 +35,24 @@ class FarmFormTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func save(_ sender: Any) {
+        let newFarm = Farm(name: nameTextField.text! , gallons: Int(gallonTextField.text!)!, produceHour: timePicker.date, address: addressTextView.text)
+        
+        var farms = [Farm]()
+        
+        if let savedFarms = Farm.loadFarms() {
+            farms = savedFarms
+        } else {
+            farms = Farm.loadSampleFarms()
+        }
+        
+        farms.append(newFarm)
+        
+        Farm.saveFarms(farms)
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func cancel(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -59,7 +79,7 @@ class FarmFormTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt
         indexPath: IndexPath) -> CGFloat {
-        let normalCellHeight = CGFloat(43)
+        let normalCellHeight = CGFloat(44)
         let largeCellHeight = CGFloat(200)
         
         switch(indexPath) {

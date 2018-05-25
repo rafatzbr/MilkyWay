@@ -9,15 +9,8 @@
 import UIKit
 
 class FarmTableViewController: UITableViewController {
-
-    @IBAction func unwindToFarm(segue: UIStoryboardSegue) {
-        guard segue.identifier == "cancelUnwind" else {
-            guard segue.identifier == "saveUnwind" else {
-                return
-            }
-            return
-        }
-    }
+    
+    var farms: [Farm] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +20,22 @@ class FarmTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        navigationItem.leftBarButtonItem = editButtonItem
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        loadData()
     }
 
+    func loadData() {
+        if let savedFarms = Farm.loadFarms() {
+            farms = savedFarms
+        } else {
+            farms = Farm.loadSampleFarms()
+        }
+        self.tableView.reloadData()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -36,25 +43,31 @@ class FarmTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return farms.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FarmCellIdentifier", for: indexPath)
 
-        // Configure the cell...
+        let farm = farms[indexPath.row]
+        
+        cell.textLabel?.text = farm.name
 
         return cell
     }
-    */
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            farms.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            Farm.saveFarms(farms)
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.
