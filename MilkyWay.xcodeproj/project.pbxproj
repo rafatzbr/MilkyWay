@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		57CA5BC920B72E7000518835 /* FarmFormTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CA5BC820B72E7000518835 /* FarmFormTableViewController.swift */; };
 		57CA5BCB20B7497C00518835 /* FarmTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CA5BCA20B7497C00518835 /* FarmTableViewController.swift */; };
+		57CA5BCD20B87E7B00518835 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CA5BCC20B87E7B00518835 /* SettingsTableViewController.swift */; };
+		57CA5BCF20B8831500518835 /* Producer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CA5BCE20B8831500518835 /* Producer.swift */; };
 		BA2B27FF20B87BF10075559D /* RouteInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2B27FE20B87BF10075559D /* RouteInstructionsViewController.swift */; };
-		BA2B280520B893090075559D /* RouteInstructionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2B280420B893090075559D /* RouteInstructionsController.swift */; };
 		BA63DDC520B7184000C7DE45 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA63DDC420B7184000C7DE45 /* AppDelegate.swift */; };
 		BA63DDC720B7184000C7DE45 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA63DDC620B7184000C7DE45 /* ViewController.swift */; };
 		BA63DDCA20B7184000C7DE45 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA63DDC820B7184000C7DE45 /* Main.storyboard */; };
@@ -24,8 +25,9 @@
 /* Begin PBXFileReference section */
 		57CA5BC820B72E7000518835 /* FarmFormTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmFormTableViewController.swift; sourceTree = "<group>"; };
 		57CA5BCA20B7497C00518835 /* FarmTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmTableViewController.swift; sourceTree = "<group>"; };
+		57CA5BCC20B87E7B00518835 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		57CA5BCE20B8831500518835 /* Producer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Producer.swift; sourceTree = "<group>"; };
 		BA2B27FE20B87BF10075559D /* RouteInstructionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteInstructionsViewController.swift; sourceTree = "<group>"; };
-		BA2B280420B893090075559D /* RouteInstructionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteInstructionsController.swift; sourceTree = "<group>"; };
 		BA63DDC120B7184000C7DE45 /* MilkyWay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MilkyWay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA63DDC420B7184000C7DE45 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA63DDC620B7184000C7DE45 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,14 +51,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BA2B280320B892B80075559D /* Other Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				BA2B280420B893090075559D /* RouteInstructionsController.swift */,
-			);
-			path = "Other Controllers";
-			sourceTree = "<group>";
-		};
 		BA63DDB820B7184000C7DE45 = {
 			isa = PBXGroup;
 			children = (
@@ -76,7 +70,6 @@
 		BA63DDC320B7184000C7DE45 /* MilkyWay */ = {
 			isa = PBXGroup;
 			children = (
-				BA2B280320B892B80075559D /* Other Controllers */,
 				BA63DDD920B72D0500C7DE45 /* Model */,
 				BA63DDD620B7196300C7DE45 /* View Controllers */,
 				BA63DDC420B7184000C7DE45 /* AppDelegate.swift */,
@@ -92,10 +85,11 @@
 		BA63DDD620B7196300C7DE45 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				BA2B27FE20B87BF10075559D /* RouteInstructionsViewController.swift */,
-				57CA5BCA20B7497C00518835 /* FarmTableViewController.swift */,
 				57CA5BC820B72E7000518835 /* FarmFormTableViewController.swift */,
+				57CA5BCA20B7497C00518835 /* FarmTableViewController.swift */,
+				BA2B27FE20B87BF10075559D /* RouteInstructionsViewController.swift */,
 				BA63DDD720B7198100C7DE45 /* RouteViewController.swift */,
+				57CA5BCC20B87E7B00518835 /* SettingsTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -105,6 +99,7 @@
 			children = (
 				BA63DDDA20B72D1800C7DE45 /* Farm.swift */,
 				BA63DDDC20B73A5C00C7DE45 /* FarmAnnotation.swift */,
+				57CA5BCE20B8831500518835 /* Producer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -184,9 +179,10 @@
 				57CA5BCB20B7497C00518835 /* FarmTableViewController.swift in Sources */,
 				BA63DDC520B7184000C7DE45 /* AppDelegate.swift in Sources */,
 				BA63DDDD20B73A5C00C7DE45 /* FarmAnnotation.swift in Sources */,
-				BA2B280520B893090075559D /* RouteInstructionsController.swift in Sources */,
 				BA2B27FF20B87BF10075559D /* RouteInstructionsViewController.swift in Sources */,
+				57CA5BCD20B87E7B00518835 /* SettingsTableViewController.swift in Sources */,
 				BA63DDD820B7198100C7DE45 /* RouteViewController.swift in Sources */,
+				57CA5BCF20B8831500518835 /* Producer.swift in Sources */,
 				57CA5BC920B72E7000518835 /* FarmFormTableViewController.swift in Sources */,
 				BA63DDDB20B72D1800C7DE45 /* Farm.swift in Sources */,
 			);

@@ -34,6 +34,8 @@ class RouteViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        locationArray = [MKMapItem]()
+        steps = [String]()
         loadData()
     }
     
@@ -46,36 +48,51 @@ class RouteViewController: UIViewController, CLLocationManagerDelegate {
         
         let queue = OperationQueue()
         
+        var producer = [Producer]()
+        if let savedProducer = Producer.loadProducer() {
+            producer.append(savedProducer)
+        } else {
+            producer.append(Producer.loadSampleProducer())
+        }
+        
+        queue.addOperation {
+            self.query(address: producer.first!.address, title: producer.first!.name, subtitle: "")
+        }
+        
         for farm in farms {
             queue.addOperation {
-                let request = MKLocalSearchRequest()
-                request.naturalLanguageQuery = farm.address
-                request.region = self.mapView.region
-                
-                let search = MKLocalSearch(request: request)
-                
-                search.start {
-                    (response, error) in
-                    if let error = error {
-                        print(error)
-                    } else {
-                        if let res = response {
-                            for local in res.mapItems {
-                                self.locationArray.append(local)
-                                
-                                let placemark = FarmAnnotation(title: farm.name,
-                                                               subtitle: "Production: \(farm.gallons) Gallons - Pickup time: \(Farm.produceHourFormatter.string(from: farm.produceHour))",
-                                    coordinate: local.placemark.coordinate)
-                                
-                                self.mapView.addAnnotation(placemark)
-                            }
-                        }
+                self.query(address: farm.address, title: farm.name, subtitle: "Production: \(farm.gallons) Gallons - Pickup time: \(Farm.produceHourFormatter.string(from: farm.produceHour))")
+            }
+        }
+    }
+
+    func query(address: String, title: String, subtitle: String) {
+        let request = MKLocalSearchRequest()
+        request.naturalLanguageQuery = address
+        request.region = self.mapView.region
+        
+        let search = MKLocalSearch(request: request)
+        
+        search.start {
+            (response, error) in
+            if let error = error {
+                print(error)
+            } else {
+                if let res = response {
+                    for local in res.mapItems {
+                        self.locationArray.append(local)
+                        
+                        let placemark = FarmAnnotation(title: title,
+                                                       subtitle: subtitle,
+                            coordinate: local.placemark.coordinate)
+                        
+                        self.mapView.addAnnotation(placemark)
                     }
                 }
             }
         }
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         checkLocationAuthorizationStatus()
@@ -106,9 +123,9 @@ class RouteViewController: UIViewController, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 //        centerMapOnLocation(location: locations.first!)
     }
-    
 
     @IBAction func calculateRouteButtonPress(_ sender: UIBarButtonItem) {
+        loadData()
         for i in 0..<locationArray.count {
             if i + 1 < locationArray.count {
                 let directionRequest = MKDirectionsRequest()
@@ -133,9 +150,7 @@ class RouteViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func showRoute(_ response: MKDirectionsResponse) {
-        
         for route in response.routes {
-            
             mapView.add(route.polyline,
                          level: MKOverlayLevel.aboveRoads)
             if route.steps.count > 0 {
@@ -151,22 +166,24 @@ class RouteViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        
         let renderer = MKPolylineRenderer(overlay: overlay)
         renderer.strokeColor = UIColor.blue
         renderer.lineWidth = 5.0
         return renderer
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func unwindFromInstructions( segue: UIStoryboardSegue) {
+        //
     }
-    */
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //        super.prepare(for: segue, sender: sender)
+        if segue.identifier == "routeInstructionsSegue" {
+            loadData()
+            let routeInstructionsViewController = segue.destination as! RouteInstructionsViewController
+            routeInstructionsViewController.steps = self.steps
+        }
+    }
 }
 
 extension RouteViewController: MKMapViewDelegate {
@@ -190,18 +207,6 @@ extension RouteViewController: MKMapViewDelegate {
             view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         }
         return view
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //        super.prepare(for: segue, sender: sender)
-        if segue.identifier == "routeInstructionsSegue" {
-            let routeInstructionsViewController = segue.destination as! RouteInstructionsViewController
-            routeInstructionsViewController.steps = self.steps
-        }
-    }
-    
-    @IBAction func unwindFromInstructions( segue: UIStoryboardSegue) {
-        //
     }
 }
 
