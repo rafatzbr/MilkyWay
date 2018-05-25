@@ -47,13 +47,17 @@ class SettingsTableViewController: UITableViewController {
     }
 
     @IBAction func saveButtonTapped(_ sender: UIButton) {
+        
+        nameTextField.resignFirstResponder()
+        addressTextView.resignFirstResponder()
+        
         Producer.saveProducer(Producer(name: nameTextField.text!, address: addressTextView.text!))
         
         let alert = UIAlertController(title: "Great Success", message: "Producer Information Updated", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default))
         
         present(alert, animated: true, completion: nil)
-        view.endEditing(true)
+        
     }
     
     // MARK: - Table view data source
