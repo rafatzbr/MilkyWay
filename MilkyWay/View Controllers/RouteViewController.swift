@@ -14,11 +14,13 @@ class RouteViewController: UIViewController, CLLocationManagerDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var calculateRouteButton: UIBarButtonItem!
+    @IBOutlet weak var instructionsButton: UIBarButtonItem!
     let regionRadius: CLLocationDistance = 1000
     let locationManager = CLLocationManager()
     let geocoder = CLGeocoder()
     var farms = [Farm]()
-    var locationArray: [(title: String, mapItem: MKMapItem)]?
+    var locationArray = [MKMapItem]()
+    var steps = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,11 +30,20 @@ class RouteViewController: UIViewController, CLLocationManagerDelegate {
         
         mapView.delegate = self
         
+        loadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        loadData()
+    }
+    
+    func loadData() {
         if let savedFarms = Farm.loadFarms() {
             farms = savedFarms
         } else {
             farms = Farm.loadSampleFarms()
         }
+        
         let queue = OperationQueue()
         
         for farm in farms {
@@ -45,20 +56,17 @@ class RouteViewController: UIViewController, CLLocationManagerDelegate {
                 
                 search.start {
                     (response, error) in
-                    if error == nil {
+                    if let error = error {
+                        print(error)
+                    } else {
                         if let res = response {
                             for local in res.mapItems {
-                                let tuple = (farm.name, local)
-                                
-                                if self.locationArray == nil {
-                                    self.locationArray = [tuple]
-                                } else {
-                                    self.locationArray?.append(tuple)
-                                }
+                                self.locationArray.append(local)
                                 
                                 let placemark = FarmAnnotation(title: farm.name,
                                                                subtitle: "Production: \(farm.gallons) Gallons - Pickup time: \(Farm.produceHourFormatter.string(from: farm.produceHour))",
-                                                                coordinate: local.placemark.coordinate)
+                                    coordinate: local.placemark.coordinate)
+                                
                                 self.mapView.addAnnotation(placemark)
                             }
                         }
@@ -101,11 +109,11 @@ class RouteViewController: UIViewController, CLLocationManagerDelegate {
     
 
     @IBAction func calculateRouteButtonPress(_ sender: UIBarButtonItem) {
-        if let locations = locationArray {
-            for location in locations {
+        for i in 0..<locationArray.count {
+            if i + 1 < locationArray.count {
                 let directionRequest = MKDirectionsRequest()
-                directionRequest.source = location.mapItem
-                directionRequest.destination = location.mapItem
+                directionRequest.source = locationArray[i]
+                directionRequest.destination = locationArray[i + 1]
                 
                 directionRequest.transportType = .automobile
                 
@@ -119,7 +127,7 @@ class RouteViewController: UIViewController, CLLocationManagerDelegate {
                     } else {
                         self.showRoute(response!)
                     }
-                }    
+                }
             }
         }
     }
@@ -130,9 +138,15 @@ class RouteViewController: UIViewController, CLLocationManagerDelegate {
             
             mapView.add(route.polyline,
                          level: MKOverlayLevel.aboveRoads)
-            for step in route.steps {
-                print(step.instructions)
+            if route.steps.count > 0 {
+                self.instructionsButton.isEnabled = true
+                for step in route.steps {
+                    steps.append(step.instructions)
+                }
+            } else {
+                self.instructionsButton.isEnabled = false
             }
+            
         }
     }
     
@@ -176,6 +190,18 @@ extension RouteViewController: MKMapViewDelegate {
             view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         }
         return view
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //        super.prepare(for: segue, sender: sender)
+        if segue.identifier == "routeInstructionsSegue" {
+            let routeInstructionsViewController = segue.destination as! RouteInstructionsViewController
+            routeInstructionsViewController.steps = self.steps
+        }
+    }
+    
+    @IBAction func unwindFromInstructions( segue: UIStoryboardSegue) {
+        //
     }
 }
 

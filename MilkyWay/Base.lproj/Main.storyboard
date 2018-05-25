@@ -19,11 +19,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xRF-Fu-lHk">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xRF-Fu-lHk">
                                 <rect key="frame" x="0.0" y="20" width="375" height="642"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A16-W4-fdj">
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A16-W4-fdj">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                         <items>
                                             <barButtonItem title="Calculate Route" id="0ym-c5-w6j">
@@ -31,26 +30,111 @@
                                                     <action selector="calculateRouteButtonPress:" destination="BYZ-38-t0r" id="a4l-HD-64u"/>
                                                 </connections>
                                             </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="4AJ-bt-Sqr"/>
+                                            <barButtonItem enabled="NO" title="Instructions" id="pE5-O1-0E0">
+                                                <connections>
+                                                    <segue destination="15V-Tt-xQ4" kind="presentation" identifier="routeInstructionsSegue" id="HZK-P7-jF0"/>
+                                                </connections>
+                                            </barButtonItem>
                                         </items>
                                     </toolbar>
-                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" mapType="standard" showsUserLocation="YES" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y0M-D1-F3d">
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y0M-D1-F3d">
                                         <rect key="frame" x="0.0" y="44" width="375" height="598"/>
                                     </mapView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="A16-W4-fdj" firstAttribute="top" secondItem="xRF-Fu-lHk" secondAttribute="top" id="zlf-lS-62T"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="xRF-Fu-lHk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="3PI-qq-8dA"/>
+                            <constraint firstAttribute="bottom" secondItem="xRF-Fu-lHk" secondAttribute="bottom" constant="5" id="6yq-Rs-09S"/>
+                            <constraint firstItem="xRF-Fu-lHk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="mcW-i9-Kzp"/>
+                            <constraint firstItem="xRF-Fu-lHk" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="n6y-xQ-vKH"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Route" id="b85-HF-inB"/>
                     <connections>
                         <outlet property="calculateRouteButton" destination="0ym-c5-w6j" id="G0i-Qf-veT"/>
+                        <outlet property="instructionsButton" destination="pE5-O1-0E0" id="PMw-lR-aSB"/>
                         <outlet property="mapView" destination="Y0M-D1-F3d" id="ObK-kZ-7Du"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2015.2" y="133.5832083958021"/>
+        </scene>
+        <!--Route Instructions View Controller-->
+        <scene sceneID="Q9v-yJ-9G8">
+            <objects>
+                <viewController id="15V-Tt-xQ4" customClass="RouteInstructionsViewController" customModule="MilkyWay" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HJi-bU-ZXx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="YK2-Hm-7t5">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bLl-hw-hqu">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="stepIdentifier" id="D0c-nM-DrK">
+                                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="D0c-nM-DrK" id="WnB-SW-gmT">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="15V-Tt-xQ4" id="eno-du-oCK"/>
+                                            <outlet property="delegate" destination="15V-Tt-xQ4" id="Huv-o9-SVD"/>
+                                        </connections>
+                                    </tableView>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T0K-MF-EdP">
+                                        <rect key="frame" x="0.0" y="603" width="375" height="44"/>
+                                        <items>
+                                            <barButtonItem title="Dismiss" id="wwB-S1-nr2">
+                                                <connections>
+                                                    <segue destination="aEg-ck-LKH" kind="unwind" unwindAction="unwindFromInstructionsWithSegue:" id="60k-Fp-j8R"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </items>
+                                    </toolbar>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="T0K-MF-EdP" secondAttribute="trailing" id="51m-lE-37O"/>
+                                    <constraint firstItem="bLl-hw-hqu" firstAttribute="leading" secondItem="YK2-Hm-7t5" secondAttribute="leading" id="DRj-T0-ujB"/>
+                                    <constraint firstItem="T0K-MF-EdP" firstAttribute="leading" secondItem="YK2-Hm-7t5" secondAttribute="leading" id="HLf-Ch-uuT"/>
+                                    <constraint firstItem="T0K-MF-EdP" firstAttribute="top" secondItem="bLl-hw-hqu" secondAttribute="bottom" id="HrP-uL-pkD"/>
+                                    <constraint firstAttribute="bottom" secondItem="T0K-MF-EdP" secondAttribute="bottom" id="btQ-8Y-fYP"/>
+                                    <constraint firstAttribute="trailing" secondItem="bLl-hw-hqu" secondAttribute="trailing" id="oSy-4R-aFd"/>
+                                    <constraint firstItem="bLl-hw-hqu" firstAttribute="top" secondItem="YK2-Hm-7t5" secondAttribute="top" id="ref-Sd-eKl"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="lFZ-Xe-Rxe" firstAttribute="bottom" secondItem="YK2-Hm-7t5" secondAttribute="bottom" id="6GF-mX-mex"/>
+                            <constraint firstItem="YK2-Hm-7t5" firstAttribute="trailing" secondItem="lFZ-Xe-Rxe" secondAttribute="trailing" id="Eds-zP-yzI"/>
+                            <constraint firstItem="YK2-Hm-7t5" firstAttribute="leading" secondItem="lFZ-Xe-Rxe" secondAttribute="leading" id="YEK-Jg-daD"/>
+                            <constraint firstItem="YK2-Hm-7t5" firstAttribute="top" secondItem="lFZ-Xe-Rxe" secondAttribute="top" id="irI-mo-j3I"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="lFZ-Xe-Rxe"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="bLl-hw-hqu" id="hhz-qp-B16"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fIL-Gq-YLf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="aEg-ck-LKH" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2918" y="134"/>
         </scene>
         <!--Farms-->
         <scene sceneID="xEA-pm-erB">
